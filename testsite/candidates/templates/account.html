@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Аккаунт</title>
+</head>
+<body>
+<h2> Данные вашего аккаунта </h2>
+
+<h2> ФИО: {{user.name}} {{user.lastname}} {{user.surname}} </h2>
+<p> Скиллы: {% for tag in user.skill.all %}
+    {{ tag.name }},
+    {% endfor %}</p>
+
+<p> Языки: {% for tag in user.language.all %}
+    {{ tag.name }},
+    {% endfor %}</p>
+
+<p> Хобби: </p>
+    {% for tag in user.hobby.all %}
+
+
+    <p>{{ tag.name }}</p> <form method="post" action="">
+    {% csrf_token %}
+    <button class="btn buy-btn" type="submit" name="delete" value={{tag.name}}> Удалить</button>
+
+
+</form>
+{% endfor %}</p>
+
+
+<hr>
+
+<h2> Выбрать хобби </h2>
+<form method="post" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" name="choice"> Выбрать</button>
+
+
+    <h2> Добавить хобби </h2>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{form2.as_p}}
+        <button type="submit" name="add"> Добавить</button>
+
+    </form>
+
+    <hr>
+    <a href="/main"> Назад </a>
+</body>
+</html>
